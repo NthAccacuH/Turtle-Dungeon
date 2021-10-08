@@ -111,7 +111,9 @@ t.goto(-500, -450)
 #psplayer.speed(0)
 #def bug():
 #    screen.addshape("bg.gif")
-#    bgr.shape("bg.gif")
+#    bgr.shape("bg.gif
+
+
 #Статистика
 he=Turtle()
 he.up()
