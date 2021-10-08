@@ -1,6 +1,6 @@
 from turtle import Turtle, Screen, setpos, hideturtle
 import random
-#Turtle_Game v.2.0
+#Turtle_Game v.1.1
 #Made by NthAccacuH
 
 #bg
