@@ -1,6 +1,6 @@
 from turtle import Turtle, Screen, setpos, hideturtle
 import random
-#Turtle_Game v.1.1
+#Turtle_Game v.2.0
 #Made by NthAccacuH
 
 #bg
@@ -20,6 +20,14 @@ bg.end_fill()
 
 #Кнопки
 screen=Screen()
+
+#Пол
+bgr=Turtle()
+bgr.up()
+bgr.speed(0)
+bgr.goto(0,200)
+screen.addshape("bgf.gif")
+bgr.shape("bgf.gif")
 
 #Ловушки
 boom=Turtle()
@@ -49,7 +57,6 @@ else:
         if deds==3:
             descentY=400
 descent.goto(descentX-5,descentY-25)
-print(descentX,descentY)
 
 def des():
     global descentX
@@ -66,26 +73,28 @@ def des():
     descentX=random.randint(-9,9)*50
     descent.goto(descentX-5,descentY-20)
     descent.clear()
-    print(descentX-20,descentY)
 def desif():
         global PlayerX
         global PlayerY
         global lvl
         global EnX
         global EnY
-        print(PlayerX,PlayerY)
         if descentX==PlayerX:
             if descentY==PlayerY:
                 des()
                 level.clear()
+                player.up()
                 PlayerX=random.randint(-9,9)*50
                 player.goto(PlayerX,PlayerY-20)
+                if EnX==-9000000:
+                    EnX=0
+                    EnY=0
+                    e.goto(0,0)
                 EnX=random.randint(-9,9)*50
                 e.goto(EnX,EnY)
                 lvl=lvl+1
                 boom.goto(-900000,-900000)
                 boss1if()
-                print("Descent on",descentX, descentY)
 
 #Рамка
 turtle=Turtle()
@@ -102,17 +111,6 @@ t.goto(-500, -300)
 t.goto(-500, -300)
 t.goto(-500, -450)
 
-#Пол
-#bgr=Turtle()
-#bgr.up()
-#bgr.speed(0)
-#psplayer=Turtle()
-#psplayer.up()
-#psplayer.speed(0)
-#def bug():
-#    screen.addshape("bg.gif")
-#    bgr.shape("bg.gif
-
 
 #Статистика
 he=Turtle()
@@ -126,13 +124,12 @@ def Hel():
     level.clear()
     level.write("Этаж№ ",lvl)
     level.write(lvl)
-    print(lvl)
     he.clear()
     if PlayerX == EnX:
         if PlayerY == EnY:
             he.color("red")
             he.write("Вы проиграли.")
-            he.exit()
+            screen.exit(2)
     else:
         he.color("green2")
         he.write("Нажимайте WASD для передвижения. Если вы столкнётесь с врагом, вы проиграете. Собирайте предметы, чтобы вам было легче проходить уровни.")
@@ -146,6 +143,7 @@ level.goto(-450,-330)
 
 #Игрок
 player=Turtle()
+player.up()
 kng="kn.gif"
 PlayerX=0
 PlayerY=0
@@ -157,6 +155,7 @@ player.pensize(0.1)
 
 #Управление игрока
 def MoveA():
+    pr()
     Hel()
     bombs=0
     global PlayerX
@@ -186,6 +185,7 @@ def MoveA():
         
         
 def MoveD():
+    pr()
     Hel()
     bombs=0
     global PlayerX
@@ -213,6 +213,7 @@ def MoveD():
         
 
 def MoveW():
+    pr()
     Hel()
     bombs=0
     global PlayerY
@@ -238,6 +239,7 @@ def MoveW():
         
 
 def MoveS():
+    pr()
     Hel()
     bombs=0
     global PlayerY
@@ -286,15 +288,104 @@ def boss1if():
     global knbX
     global knbY
     if lvl==5:
+        pr()
         knbX=0
         knbY=0
         knb.goto(knbX, knbY)
+        pr1X=descentX-50
+        pr1Y=descentY
+        pr2X=descentX+50
+        pr2Y=descentY
+        pr3Y=descentY-50
+        pr3X=descentX
+        pr4Y=descentY+50
+        pr4X=descentX
+        pris1.goto(pr1X,pr1Y-20)
+        pris2.goto(pr2X,pr2Y-20)
+        pris3.goto(pr3X,pr3Y-20)
+        pris4.goto(pr4X,pr4Y-20)
 
+#Прислужники босса№1
+screen.addshape("pris1.gif")
+pr1X=-90000
+pr1Y=0
+pr2X=-90000
+pr2Y=0
+pr3X=-90000
+pr3Y=0
+pr4X=-90000
+pr4Y=0
+pris1=Turtle()
+pris1.speed(0)
+pris1.shape("pris1.gif")
+pris1.up()
+pris1.goto(pr1X,pr1Y)
+pris2=Turtle()
+pris2.speed(0)
+pris2.up()
+pris2.goto(pr2X,pr2Y)
+pris2.shape("pris1.gif")
+pris3=Turtle()
+pris3.speed(0)
+pris3.up()
+pris3.goto(pr3X,pr3Y)
+pris3.shape("pris1.gif")
+pris4=Turtle()
+pris4.speed(0)
+pris4.up()
+pris4.goto(pr4X,pr4Y)
+pris4.shape("pris1.gif")
+
+#Ввод
 screen.onkey(MoveA,"a")
 screen.onkey(MoveD,"d")
 screen.onkey(MoveW,"w")
 screen.onkey(MoveS,"s")
 screen.onkey(TraP,"space")
+
+#Прислужники босса№1
+def pr():
+    global pr1X
+    global pr1Y
+    global pr2X
+    global pr2Y
+    global pr3X
+    global pr3Y
+    global pr4X
+    global pr4Y
+    global PlayerX
+    global PlayerY
+    if PlayerX==pr1X:
+        if PlayerY==pr1Y:
+            he.color("red")
+            he.write("Вы проиграли.")
+            exit()
+            print("a")
+    else:
+        if PlayerX==pr2X:
+            if PlayerY==pr2Y:
+                he.color("red")
+                he.write("Вы проиграли.")
+                exit()
+                print("a")
+                pass
+        else:
+            if PlayerX==pr3X:
+                if PlayerY==pr3Y:
+                    he.color("red")
+                    he.write("Вы проиграли.")
+                    exit()
+                    print("a")
+                    pass
+            else:
+                if PlayerX==pr4X:
+                    if PlayerY==pr4Y:
+                        he.color("red")
+                        he.write("Вы проиграли.")
+                        e.bye()
+                        exit()
+                        print("a")
+                        pass
 
 #Управление врага
 e=Turtle()
