@@ -1,6 +1,6 @@
 from turtle import Turtle, Screen, setpos, hideturtle
 import random
-#Turtle_Game v.2.0
+#Turtle_Game v.2.1
 #Made by NthAccacuH
 
 #bg
@@ -129,7 +129,7 @@ def Hel():
         if PlayerY == EnY:
             he.color("red")
             he.write("Вы проиграли.")
-            screen.exit(2)
+            exit()
     else:
         he.color("green2")
         he.write("Нажимайте WASD для передвижения. Если вы столкнётесь с врагом, вы проиграете. Собирайте предметы, чтобы вам было легче проходить уровни.")
@@ -287,6 +287,18 @@ knb.goto(knbX,knbY)
 def boss1if():
     global knbX
     global knbY
+    global pr1X
+    global pr1Y
+    global pr2X
+    global pr2Y
+    global pr3X
+    global pr3Y
+    global pr4X
+    global pr4Y
+    global PlayerX
+    global PlayerY
+    global descentX
+    global descentY
     if lvl==5:
         pr()
         knbX=0
@@ -308,13 +320,13 @@ def boss1if():
 #Прислужники босса№1
 screen.addshape("pris1.gif")
 pr1X=-90000
-pr1Y=0
+pr1Y=-50
 pr2X=-90000
-pr2Y=0
+pr2Y=-50
 pr3X=-90000
-pr3Y=0
+pr3Y=-50
 pr4X=-90000
-pr4Y=0
+pr4Y=-50
 pris1=Turtle()
 pris1.speed(0)
 pris1.shape("pris1.gif")
@@ -336,12 +348,17 @@ pris4.up()
 pris4.goto(pr4X,pr4Y)
 pris4.shape("pris1.gif")
 
-#Ввод
-screen.onkey(MoveA,"a")
-screen.onkey(MoveD,"d")
-screen.onkey(MoveW,"w")
-screen.onkey(MoveS,"s")
-screen.onkey(TraP,"space")
+
+
+#тест
+#def posplay(PlayerX,PlayerY):
+
+#Функции
+posP=(PlayerX, PlayerY)
+posPR1=(pr1X, pr1Y)
+posPR2=(pr2X, pr2Y)
+posPR3=(pr3X, pr3Y)
+posPR4=(pr4X, pr4Y)
 
 #Прислужники босса№1
 def pr():
@@ -355,37 +372,33 @@ def pr():
     global pr4Y
     global PlayerX
     global PlayerY
-    if PlayerX==pr1X:
-        if PlayerY==pr1Y:
-            he.color("red")
-            he.write("Вы проиграли.")
-            exit()
-            print("a")
-    else:
-        if PlayerX==pr2X:
-            if PlayerY==pr2Y:
-                he.color("red")
-                he.write("Вы проиграли.")
-                exit()
-                print("a")
-                pass
-        else:
-            if PlayerX==pr3X:
-                if PlayerY==pr3Y:
-                    he.color("red")
-                    he.write("Вы проиграли.")
-                    exit()
-                    print("a")
-                    pass
-            else:
-                if PlayerX==pr4X:
-                    if PlayerY==pr4Y:
-                        he.color("red")
-                        he.write("Вы проиграли.")
-                        e.bye()
-                        exit()
-                        print("a")
-                        pass
+    global posP
+    global posPR1
+    global posPR2
+    global posPR3
+    global posPR4
+    posP=(PlayerX, PlayerY)
+    posPR1=(pr1X, pr1Y)
+    posPR2=(pr2X, pr2Y)
+    posPR3=(pr3X, pr3Y)
+    posPR4=(pr4X, pr4Y)
+    if posP==posPR1:
+        he.color("red")
+        he.write("Вы проиграли.")
+        exit()
+    if posP==posPR2:
+        he.color("red")
+        he.write("Вы проиграли.")
+        exit()
+    if posP==posPR3:
+        he.color("red")
+        he.write("Вы проиграли.")
+        exit()
+    if posP==posPR4:
+        he.color("red")
+        he.write("Вы проиграли.")
+        exit()
+        
 
 #Управление врага
 e=Turtle()
@@ -454,3 +467,14 @@ def babah():
 
 
 screen.listen()
+
+#Ввод
+while True:
+    screen.onkey(MoveA,"a")
+    screen.onkey(MoveD,"d")
+    screen.onkey(MoveW,"w")
+    screen.onkey(MoveS,"s")
+    screen.onkey(TraP,"space")
+    
+#Мусор
+#screen.player.remove(player)
